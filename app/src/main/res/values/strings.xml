@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">AP2TM</string>
-    <string name="toolbar_title">List Movies</string>
-
+    <string name="toolbar_title">Filmes em Destaque</string>
+    <string name="movie_director_format">Direção: %1$s</string>
+    <string name="movie_year_format">Ano: %1$d</string>
+    <string name="movie_removed_message">%1$s foi removido da lista.</string>
+    <string name="empty_state">Toque no card para ver os detalhes do filme. Toque e segure para remover.</string>
+    <string name="hint_tap_for_details">Toque para ver detalhes</string>
 </resources>
