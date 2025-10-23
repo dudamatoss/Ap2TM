@@ -32,17 +32,12 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun bindMovie(movie: Todo) {
-        val title = findViewById<TextView>(R.id.movieTitle)
-        val director = findViewById<TextView>(R.id.movieDirector)
-        val release = findViewById<TextView>(R.id.movieReleaseDate)
-        val synopsis = findViewById<TextView>(R.id.movieSynopsis)
-        val watchedLabel = findViewById<TextView>(R.id.movieWatchedLabel)
-
-        title.text = movie.title
-        director.text = getString(R.string.movie_director_format, movie.openedBy)
-        release.text = movie.createdAt
-        synopsis.text = movie.movieDescription
-        watchedLabel.text = if (movie.check) {
+        findViewById<TextView>(R.id.idTodo).text = movie.id.toString()
+        findViewById<TextView>(R.id.todoTitle).text = movie.title
+        findViewById<TextView>(R.id.movieDescription).text = movie.movieDescription
+        findViewById<TextView>(R.id.createdAt).text = getString(R.string.movie_release_at, movie.createdAt)
+        findViewById<TextView>(R.id.openedBy).text = getString(R.string.movie_directed_by, movie.openedBy)
+        findViewById<TextView>(R.id.movieStatus).text = if (movie.check) {
             getString(R.string.movie_watched_message)
         } else {
             getString(R.string.movie_not_watched_message)
