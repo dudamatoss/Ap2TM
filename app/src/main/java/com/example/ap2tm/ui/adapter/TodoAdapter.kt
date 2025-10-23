@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.ap2tm.R
 import com.example.ap2tm.data.model.Todo
 
-
 class TodoAdapter(
     private val onDelete: (Todo) -> Unit,
     private val onDetails: (Todo) -> Unit

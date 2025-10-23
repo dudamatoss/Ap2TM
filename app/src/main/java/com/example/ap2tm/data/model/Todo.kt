@@ -5,8 +5,8 @@ import java.io.Serializable
 data class Todo(
     val id: Int,
     val title: String,
-    val movieDescription: String,
-    val check: Boolean,
-    val createdAt: String,
-    val openedBy: String
+    val synopsis: String,
+    val watched: Boolean,
+    val releaseDate: String,
+    val director: String
 ) : Serializable

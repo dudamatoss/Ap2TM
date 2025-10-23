@@ -3,9 +3,11 @@ package com.example.ap2tm.ui.adapter
 import android.graphics.Paint
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ap2tm.R
 import com.example.ap2tm.data.model.Todo
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.checkbox.MaterialCheckBox
 
 class TodoViewHolder(
@@ -14,54 +16,38 @@ class TodoViewHolder(
     private val onDetails: (Todo) -> Unit
 ) : RecyclerView.ViewHolder(itemView) {
     private val title: TextView = itemView.findViewById(R.id.titleTodo)
-    private val movieDescription: TextView = itemView.findViewById(R.id.todoMovieDescription)
+    private val synopsis: TextView = itemView.findViewById(R.id.todoMovieDescription)
+    private val releaseDate: TextView = itemView.findViewById(R.id.todoReleaseDate)
+    private val director: TextView = itemView.findViewById(R.id.todoDirector)
     private val todoCheck: MaterialCheckBox = itemView.findViewById(R.id.todoCheck)
-    private val actionDelete: TextView = itemView.findViewById(R.id.actionDelete)
-    private val actionDetails: TextView = itemView.findViewById(R.id.actionDetails)
+    private val detailsButton: MaterialButton = itemView.findViewById(R.id.actionDetails)
 
     fun bind(todo: Todo) {
         title.text = todo.title
-        movieDescription.text = todo.movieDescription
-        todoCheck.isChecked = todo.check
+        synopsis.text = todo.synopsis
+        releaseDate.text = todo.releaseDate
+        director.text = itemView.context.getString(R.string.movie_director_format, todo.director)
 
-        actionDelete.setOnClickListener {
-            onDelete(todo)
-        }
+        todoCheck.isChecked = todo.watched
+        applyWatchedStyle(todo.watched)
 
-        actionDetails.setOnClickListener {
+        itemView.setOnClickListener {
             onDetails(todo)
         }
-        doPaintTask()
-        paintTaskChecked()
-    }
+        detailsButton.setOnClickListener {
+            onDetails(todo)
+        }
 
-    private fun paintTaskChecked() {
-        this.todoCheck.addOnCheckedStateChangedListener { checkBox, state ->
-            if (checkBox.isChecked) {
-                this.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                this.movieDescription.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-                this.actionDetails.visibility = View.GONE
-                this.actionDelete.visibility = View.GONE
-            } else {
-                this.title.paintFlags = 0
-                this.movieDescription.paintFlags = 0
-                this.actionDetails.visibility = View.VISIBLE
-                this.actionDelete.visibility = View.VISIBLE
-            }
+        itemView.setOnLongClickListener {
+            onDelete(todo)
+            true
         }
     }
 
-    private fun doPaintTask() {
-        if (this.todoCheck.isChecked) {
-            this.title.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            this.movieDescription.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            this.actionDetails.visibility = View.GONE
-            this.actionDelete.visibility = View.GONE
-        } else {
-            this.title.paintFlags = 0
-            this.movieDescription.paintFlags = 0
-            this.actionDetails.visibility = View.VISIBLE
-            this.actionDelete.visibility = View.VISIBLE
-        }
+    private fun applyWatchedStyle(isWatched: Boolean) {
+        val strikeFlag = if (isWatched) Paint.STRIKE_THRU_TEXT_FLAG else 0
+        title.paintFlags = strikeFlag
+        synopsis.paintFlags = strikeFlag
+        detailsButton.isVisible = !isWatched
     }
 }

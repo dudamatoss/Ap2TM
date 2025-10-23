@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">AP2TM</string>
-    <string name="toolbar_title">List Movies</string>
-
+    <string name="toolbar_title">Catálogo de Filmes</string>
+    <string name="details_toolbar_title">Detalhes do Filme</string>
+    <string name="empty_state_title">Nenhum filme na lista</string>
+    <string name="empty_state_subtitle">Adicione novos títulos para acompanhar o que assistir.</string>
+    <string name="action_see_details">Ver detalhes</string>
+    <string name="movie_director_format">Dirigido por %1$s</string>
+    <string name="movie_removed_message">%1$s foi removido da sua lista.</string>
+    <string name="movie_watched_message">Você marcou este filme como assistido.</string>
+    <string name="movie_not_watched_message">Este filme ainda está na sua lista para assistir.</string>
+    <string name="movie_watched_accessibility">Marcar como assistido</string>
+    <string name="synopsis_section_title">Sinopse</string>
 </resources>

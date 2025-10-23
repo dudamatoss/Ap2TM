@@ -4,92 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="16dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewTodo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="3dp"
+        app:cardUseCompactPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/ripple_tint"
+        app:strokeColor="@color/card_stroke"
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp">
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/todoCheck"
-                android:layout_width="51dp"
-                android:layout_height="56dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/titleTodo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:textAlignment="textStart"
-                android:textSize="22sp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintEnd_toStartOf="@id/todoCheck"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Title" />
+                tools:text="Interestelar" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/todoCheck"
+                style="@style/Widget.Material3.CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:clickable="false"
+                android:enabled="false"
+                android:focusable="false"
+                android:contentDescription="@string/movie_watched_accessibility"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/todoReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/release_badge_background"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                android:textColor="@color/text_on_badge"
+                app:layout_constraintBaseline_toBaselineOf="@id/todoCheck"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="06/11/2014" />
+
+            <TextView
+                android:id="@+id/todoDirector"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@color/text_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleTodo"
+                tools:text="Dirigido por Christopher Nolan" />
 
             <TextView
                 android:id="@+id/todoMovieDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:textAlignment="textStart"
-                android:textColor="#5e5f5f"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/text_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleTodo"
-                tools:text="Descrição do card onde fala sobre a atividade que está pendente" />
+                app:layout_constraintTop_toBottomOf="@id/todoDirector"
+                tools:text="Um piloto viaja por um buraco de minhoca em busca de um novo lar para a humanidade." />
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/actionDetails"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Visualizar"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/todoMovieDescription" />
-
-            <TextView
-                android:id="@+id/actionDelete"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Deletar"
-                android:textAlignment="textStart"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/actionDetails"
-                app:layout_constraintTop_toBottomOf="@id/todoMovieDescription" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.84" />
-
+                android:layout_marginTop="12dp"
+                android:text="@string/action_see_details"
+                android:textColor="@color/text_primary"
+                app:icon="@drawable/ic_arrow_right"
+                app:iconTint="@color/text_primary"
+                app:iconGravity="textEnd"
+                app:iconPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/todoMovieDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </com.google.android.material.card.MaterialCardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

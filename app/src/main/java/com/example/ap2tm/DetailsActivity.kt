@@ -3,14 +3,12 @@ package com.example.ap2tm
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.ap2tm.data.model.Todo
 
-
 class DetailsActivity : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -18,26 +16,36 @@ class DetailsActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
-        val id = findViewById<TextView>(R.id.idTodo)
-        val title = findViewById<TextView>(R.id.todoTitle)
-        val description = findViewById<TextView>(R.id.movieDescription)
-        val date = findViewById<TextView>(R.id.createdAt)
-        val user = findViewById<TextView>(R.id.openedBy)
+        val movie = retrieveMovie() ?: return finish()
+        bindMovie(movie)
+    }
 
-        intent.extras?.getSerializable("todo", Todo::class.java).also {
-            it?.let {
-                id.text = it.id.toString()
-                title.text = it.title
-                description.text = it.movieDescription
-                date.text = it.createdAt
-                user.text = it.openedBy
-            }
+    private fun retrieveMovie(): Todo? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("todo", Todo::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("todo") as? Todo
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
+    private fun bindMovie(movie: Todo) {
+        val title = findViewById<TextView>(R.id.movieTitle)
+        val director = findViewById<TextView>(R.id.movieDirector)
+        val release = findViewById<TextView>(R.id.movieReleaseDate)
+        val synopsis = findViewById<TextView>(R.id.movieSynopsis)
+        val watchedLabel = findViewById<TextView>(R.id.movieWatchedLabel)
+
+        title.text = movie.title
+        director.text = getString(R.string.movie_director_format, movie.director)
+        release.text = movie.releaseDate
+        synopsis.text = movie.synopsis
+        watchedLabel.text = if (movie.watched) {
+            getString(R.string.movie_watched_message)
+        } else {
+            getString(R.string.movie_not_watched_message)
+        }
     }
 }

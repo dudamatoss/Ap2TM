@@ -13,10 +13,10 @@
         android:theme="@style/Theme.AP2TM"
         tools:targetApi="31">
         <activity
-            android:name=".DetailsActivity"
-            android:exported="false"/>
+            android:name=".ui.details.DetailsActivity"
+            android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
