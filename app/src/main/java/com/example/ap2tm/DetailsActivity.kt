@@ -39,10 +39,10 @@ class DetailsActivity : AppCompatActivity() {
         val watchedLabel = findViewById<TextView>(R.id.movieWatchedLabel)
 
         title.text = movie.title
-        director.text = getString(R.string.movie_director_format, movie.director)
-        release.text = movie.releaseDate
-        synopsis.text = movie.synopsis
-        watchedLabel.text = if (movie.watched) {
+        director.text = getString(R.string.movie_director_format, movie.openedBy)
+        release.text = movie.createdAt
+        synopsis.text = movie.movieDescription
+        watchedLabel.text = if (movie.check) {
             getString(R.string.movie_watched_message)
         } else {
             getString(R.string.movie_not_watched_message)
