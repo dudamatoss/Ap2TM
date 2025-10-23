@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(
                 this,
                 getString(R.string.movie_removed_message, movie.title),
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_LONG
             ).show()
         }
     }
